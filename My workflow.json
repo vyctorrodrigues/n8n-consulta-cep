@@ -1,0 +1,84 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "consulta-cep",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "77a01351-1964-4b53-97fa-b468add04736",
+      "name": "Webhook",
+      "webhookId": "a4b8a030-b5d0-4bf9-b0cf-b459fbd1fde0"
+    },
+    {
+      "parameters": {
+        "url": "=https://viacep.com.br/ws/{{ $json.query.cep }}/json/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a5d70fac-310e-4902-9eed-6d4fded3c983",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        416,
+        0
+      ],
+      "id": "1f86b966-5d58-4640-8e53-242a78ca7b71",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "cea6d17c-b885-49f0-b5f5-e5fbf5fed06a",
+  "meta": {
+    "instanceId": "cd7a902eaa8bd5e9d24c11ee2ed0795e306bfc1881af311a1ceec4be11910adb"
+  },
+  "id": "vyFWQMtdrY0bJXIR",
+  "tags": []
+}
